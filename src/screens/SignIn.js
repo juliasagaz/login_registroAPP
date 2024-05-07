@@ -9,15 +9,15 @@ const SignIn = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   const [texto, setTexto] = useState("");
-  const [style, setStyle] = useState(style);
+  const [style, setStyle] = useState();
 
   function seguir() {
     if (!email || !password) {
       setTexto("Preencha os campos acima!!!");
-   
+      setStyle(styles.textinhomagico);
     } else if (email && password) {
       setTexto("Sucesso!!!");
-     
+      setStyle(styles.textinhomagico2);
       navigation.navigate("Home");
     }
   }
@@ -65,7 +65,7 @@ const SignIn = ({ navigation }) => {
           <Text style={styles.createAccountText}>Crie uma</Text>
         </Text>
       </TouchableOpacity>
-      <Text>{texto}</Text>
+      <Text style={style}>{texto}</Text>
     </SafeAreaView>
   );
 };

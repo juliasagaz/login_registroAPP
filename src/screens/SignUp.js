@@ -7,6 +7,20 @@ const SignUp = ({ navigation }) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const [style, setStyle] = useState();
+  const [texto, setTexto] = useState("");
+
+  function seguir() {
+    if (!name || !text || !password) {
+      setTexto("Preencha os campos acima!!!");
+      setStyle(styles.textinhomagico);
+    } else if (email && password) {
+      setTexto("Sucesso!!!");
+      setStyle(styles.textinhomagico2);
+      navigation.navigate("Home");
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.createAccount}>Criar conta</Text>
@@ -52,7 +66,7 @@ const SignUp = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button style={styles.createButton} mode="contained">
+      <Button style={styles.createButton} mode="contained" onPress={seguir}>
         Criar
       </Button>
       <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
@@ -60,6 +74,7 @@ const SignUp = ({ navigation }) => {
           Já tem uma conta? <Text style={styles.loginText}>Faça o login</Text>
         </Text>
       </TouchableOpacity>
+      <Text style={style}> {texto}</Text>
     </SafeAreaView>
   );
 };
@@ -86,6 +101,20 @@ const styles = StyleSheet.create({
   loginText: {
     fontWeight: "bold",
     color: "#6200ee",
+  },
+  textinhomagico: {
+    marginTop: 60,
+    color: "red",
+    border: "2 red solid",
+    borderRadius: 10,
+    padding: 10,
+  },
+  textinhomagico2: {
+    marginTop: 60,
+    color: "green",
+    border: "2 green solid",
+    borderRadius: 10,
+    padding: 10,
   },
 });
 export default SignUp;
