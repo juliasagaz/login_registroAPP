@@ -6,16 +6,24 @@ import SignUp from "./src/screens/SignUp";
 import { Provider } from "./src/context/authContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
+const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="MainHome" >
+          {() => (
+            <Drawer.Navigator>
+              <Drawer.Screen name='SignIn' component={SignIn} />
+              <Drawer.Screen name='SignUp' component={SignUp} />
+              <Drawer.Screen name='Home' component={HomeScreen} />
+            </Drawer.Navigator>
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

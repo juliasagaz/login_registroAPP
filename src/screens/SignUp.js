@@ -9,12 +9,24 @@ const SignUp = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(true);
   const [style, setStyle] = useState();
   const [texto, setTexto] = useState("");
+  const [campo, setCampo] = useState("");
+  const [campo2, setCampo2] = useState("");
+  const [campo3, setCampo3] = useState("");
 
   function seguir() {
-    if (!name || !text || !password) {
+    if (!name && !text && !password) {
       setTexto("Preencha os campos acima!!!");
       setStyle(styles.textinhomagico);
-    } else if (email && password) {
+    } else if (!name) {
+      setCampo("Preencher esse campo!!");
+      setStyle(styles.mensagem);
+    } else if (!text) {
+      setCampo2("Preencher esse campo!!");
+      setStyle(styles.mensagem);
+    } else if (!password) {
+      setCampo3("Preencher esse campo!!");
+      setStyle(styles.mensagem);
+    } else if (text && password) {
       setTexto("Sucesso!!!");
       setStyle(styles.textinhomagico2);
       navigation.navigate("Home");
@@ -32,14 +44,17 @@ const SignUp = ({ navigation }) => {
         value={name}
         onChangeText={(text) => setName(text)}
       />
+      <Text style={style}>{campo}</Text>
       <TextInput
         style={styles.textInput}
         label="E-mail"
         mode="flat"
+        keyboardType="email-address"
         left={<TextInput.Icon icon="at" size={25} color="black" />}
         value={text}
         onChangeText={(text) => setText(text)}
       />
+      <Text style={style}>{campo2}</Text>
       <TextInput
         style={styles.textInput}
         label="Senha"
@@ -66,6 +81,7 @@ const SignUp = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
+      <Text style={style}>{campo3}</Text>
       <Button style={styles.createButton} mode="contained" onPress={seguir}>
         Criar
       </Button>
@@ -115,6 +131,11 @@ const styles = StyleSheet.create({
     border: "2 green solid",
     borderRadius: 10,
     padding: 10,
+  },
+  mensagem: {
+    color: "red",
+    border: "2 red solid",
+    borderRadius: 10,
   },
 });
 export default SignUp;

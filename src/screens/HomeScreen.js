@@ -1,15 +1,14 @@
-
+import MyDrawer from '../components/menu';
 import { View, Text, StyleSheet } from "react-native";
 
-
-export default function HomeScreen({navigation}) {
+export default function HomeScreen() {
     return(
        <View style={styles.container}>
-           <Text>xccvwleqcvleqjc</Text>
+           
+           <Text>Home Screen 😁😁</Text>
        </View>
     )
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

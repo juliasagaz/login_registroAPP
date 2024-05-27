@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Text, TextInput } from "react-native-paper";
 import { Context } from "../context/authContext";
@@ -10,12 +10,22 @@ const SignIn = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(true);
   const [texto, setTexto] = useState("");
   const [style, setStyle] = useState();
+  const [campo1, setCampo1] = useState("");
+  const [campo2, setCampo2] = useState("");
 
   function seguir() {
-    if (!email || !password) {
-      setTexto("Preencha os campos acima!!!");
+    if (!email && !password) {
+      alert("Preencha os campos acima!!!");
       setStyle(styles.textinhomagico);
-    } else if (email && password) {
+    } else if (!email) {
+      setCampo1("Preencha esse campo!!!");
+      setStyle(styles.erro);
+    } else if (!password) {
+      setCampo2("Preencha esse campo!!!");
+      setStyle(styles.erro);
+    }
+    else{
+      
       setTexto("Sucesso!!!");
       setStyle(styles.textinhomagico2);
       navigation.navigate("Home");
@@ -28,34 +38,38 @@ const SignIn = ({ navigation }) => {
         style={styles.textInput}
         label="E-mail"
         value={email}
+        keyboardType="email-address"
         onChangeText={(text) => setEmail(text)}
-        left={<TextInput.Icon icon="at" size={25} color="black" />}
+       // left={<TextInput.Icon icon="at" size={25} color="black" />}
+        
       />
+      <Text>{campo1}</Text>
       <TextInput
         style={styles.textInput}
         label="Senha"
         value={password}
         onChangeText={(text) => setPassword(text)}
-        left={<TextInput.Icon icon="lock" size={25} color="black" />}
+        //left={<TextInput.Icon icon="lock" size={25} color="black" />}
         secureTextEntry={showPassword}
-        right={
+       /* right={
           showPassword ? (
-            <TextInput.Icon
+          <TextInput.Icon
               icon="eye"
               size={25}
               color="black"
               onPress={() => setShowPassword(!showPassword)}
             />
           ) : (
-            <TextInput.Icon
+           <TextInput.Icon
               icon="eye-off"
               size={25}
               color="black"
               onPress={() => setShowPassword(!showPassword)}
             />
           )
-        }
+        }*/
       />
+      <Text>{campo2}</Text>
       <Button mode="contained" style={styles.loginButton} onPress={seguir}>
         Login
       </Button>
@@ -107,5 +121,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
   },
+  erro: {
+    color: "red",
+  }
 });
 export default SignIn;
