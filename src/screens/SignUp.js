@@ -15,19 +15,19 @@ const SignUp = ({ navigation }) => {
 
   function seguir() {
     if (!name && !text && !password) {
-      setTexto("Preencha os campos acima!!!");
+      alert("Preencha os campos acima!!!");
       setStyle(styles.textinhomagico);
     } else if (!name) {
-      setCampo("Preencher esse campo!!");
+      alert("Preencher esse campo!!");
       setStyle(styles.mensagem);
     } else if (!text) {
-      setCampo2("Preencher esse campo!!");
+      alert("Preencher esse campo!!");
       setStyle(styles.mensagem);
     } else if (!password) {
-      setCampo3("Preencher esse campo!!");
+      alert("Preencher esse campo!!");
       setStyle(styles.mensagem);
     } else if (text && password) {
-      setTexto("Sucesso!!!");
+      alert("Sucesso!!!");
       setStyle(styles.textinhomagico2);
       navigation.navigate("Home");
     }
@@ -44,7 +44,7 @@ const SignUp = ({ navigation }) => {
         value={name}
         onChangeText={(text) => setName(text)}
       />
-      <Text style={style}>{campo}</Text>
+      
       <TextInput
         style={styles.textInput}
         label="E-mail"
@@ -54,7 +54,7 @@ const SignUp = ({ navigation }) => {
         value={text}
         onChangeText={(text) => setText(text)}
       />
-      <Text style={style}>{campo2}</Text>
+      
       <TextInput
         style={styles.textInput}
         label="Senha"
@@ -81,7 +81,7 @@ const SignUp = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Text style={style}>{campo3}</Text>
+      
       <Button style={styles.createButton} mode="contained" onPress={seguir}>
         Criar
       </Button>

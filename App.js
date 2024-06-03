@@ -18,8 +18,8 @@ const App = () => {
         <Stack.Screen name="MainHome" >
           {() => (
             <Drawer.Navigator>
-              <Drawer.Screen name='SignIn' component={SignIn} />
-              <Drawer.Screen name='SignUp' component={SignUp} />
+              <Drawer.Screen name='SignIn' component={SignIn} options={{ headerShown: false,}} />
+              <Drawer.Screen name='SignUp' component={SignUp} options={{ headerShown: false, }} />
               <Drawer.Screen name='Home' component={HomeScreen} />
             </Drawer.Navigator>
           )}
