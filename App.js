@@ -7,6 +7,7 @@ import { Provider } from "./src/context/authContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import Article from "./src/screens/ArticleScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ const App = () => {
               <Drawer.Screen name='SignIn' component={SignIn} options={{ headerShown: false,}} />
               <Drawer.Screen name='SignUp' component={SignUp} options={{ headerShown: false, }} />
               <Drawer.Screen name='Home' component={HomeScreen} />
+              <Drawer.Screen name='Article' component={Article} />
             </Drawer.Navigator>
           )}
         </Stack.Screen>
