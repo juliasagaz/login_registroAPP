@@ -1,41 +1,44 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import SignIn from "./src/screens/SignIn";
 import SignUp from "./src/screens/SignUp";
 import { Provider } from "./src/context/authContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import Article from "./src/screens/ArticleScreen";
+import { AppRegistry } from "react-native";
 
 const Drawer = createDrawerNavigator();
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
+
+const AuthStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="SignIn" component={SignIn} />
+    <Stack.Screen name="SignUp" component={SignUp} />
+  </Stack.Navigator>
+);
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="MainHome" >
-          {() => (
-            <Drawer.Navigator>
-              <Drawer.Screen name='SignIn' component={SignIn} options={{ headerShown: false,}} />
-              <Drawer.Screen name='SignUp' component={SignUp} options={{ headerShown: false, }} />
-              <Drawer.Screen name='Home' component={HomeScreen} />
-              <Drawer.Screen name='Article' component={Article} />
-            </Drawer.Navigator>
-          )}
-        </Stack.Screen>
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name='Auth' component={AuthStack} />
+        <Drawer.Screen name='Home' component={HomeScreen} />
+        <Drawer.Screen name='Article' component={Article} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
-export default () => {
-  return (
-    <Provider>
-      <SafeAreaProvider>
-        <App />
-      </SafeAreaProvider>
-    </Provider>
-  );
-};
+
+// Registrar o componente principal do aplicativo
+AppRegistry.registerComponent('MyApp', () => () => (
+  <Provider>
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
+  </Provider>
+));
+
+export default App;
